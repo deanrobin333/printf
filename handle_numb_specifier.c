@@ -4,34 +4,42 @@
 
 
 /**
- * handle_number - helper function to print an integer in a given base
- * @n: integer to print
- * @base: base to print (between 2 and 16)
+ * handle_number - helper function to print an integer
+ * @args: arguments
  * Return: number of characters printed
  */
 
-int handle_number(unsigned int n, unsigned int base)
+int handle_number(va_list args)
 {
-	static const char *const digits = "0123456789ABCDEF";
-	char buffer[100];
-	int len = 0;
+	int i;
+	int check;
+	int length;
+	unsigned int num;
 
-	if (base < 2 || base > 16)
-		return (-1);
+	i = va_arg(args, int);
+	check = 1;
+	length = 0;
 
-	do {
-		buffer[len++] = digits[n % base];
-		n /= base;
-	} while (n > 0);
-
-	while (len > 0)
+	if (i < 0)
 	{
-		_putchar(buffer[--len]);
+		length += _putchar('-');
+		num = i * -1;
+	}
+	else
+		num = i;
+
+	for (; num / check > 9; )
+		check *= 10;
+
+	for (; check != 0; )
+	{
+		length += _putchar('0' + num / check);
+		num %= check;
+		check /= 10;
 	}
 
-	return (len);
+	return (length);
 }
-
 /**
  * handle_d - handle format specifier "d"
  * @args: va_list containing the integer to print
@@ -39,20 +47,12 @@ int handle_number(unsigned int n, unsigned int base)
  */
 int handle_d(va_list args)
 {
-	int n = va_arg(args, int);
-	int len = 0, sign = 1;
+	int n;
 
-	if (n < 0)
-	{
-		sign = -1;
-		len += _putchar('-');
-	}
+	n = handle_number(args);
+	return (n);
 
-	len += handle_number(n * sign, 10);
-
-	return (len);
 }
-
 /**
  * handle_i - handle format specifier "d"
  * @args: va_list containing the integer to print
