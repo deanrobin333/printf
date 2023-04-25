@@ -1,91 +1,46 @@
 #include <stdio.h>
 #include <stdarg.h>
-#include <unistd.h>
 #include "main.h"
+
 /**
- * handle_char - function that handles characters
- * @c: character
- * @count: iterate
- * Return: void
+ * handle_c - prints a single character
+ * @args: the list of arguments
+ * Return: the number of characters printed
  */
-void handle_char(char c, int *count)
+int handle_c(va_list args)
 {
+	char c = va_arg(args, int);
+
 	_putchar(c);
-	if (count != NULL)
-	{
-		++(*count);
-	}
+	return (1);
 }
 
 /**
- * handle_string - function that deals with strings.
- * @s: string being handled
- * @len: length of string
- * @count: iterate
- * Return: void
+ * handle_s - prints a string
+ * @args: the list of arguments
+ * Return: the number of characters printed
  */
-
-void handle_string(const char *s, int len, int *count)
+int handle_s(va_list args)
 {
+	char *str = va_arg(args, char *);
 	int i;
 
-	for (i = 0; i < len; ++i)
-	{
-		_putchar(s[i]);
-		if (count != NULL)
-		{
-			++(*count);
-		}
-	}
+	if (str == NULL)
+		str = "(null)";
+	for (i = 0; str[i] != '\0'; i++)
+		_putchar(str[i]);
+	return (i);
 }
 
 /**
- * handle_format_specifier - handles format specifier for _printf function
- * @format_ptr: pointer to format in printf function
- * @args: number of arguments
- * Return: value
+ * handle_percent - prints a percent symbol
+ * @args: the list of arguments (unused)
+ *
+ * Return: the number of characters printed (always 1)
  */
-
-int handle_format_specifier(const char **format_ptr, va_list args)
+int handle_percent(__attribute__((unused))va_list args)
 {
-	const char *format = *format_ptr;
-
-	if (*format == 'c')
-	{
-		char c = va_arg(args, int);
-
-		handle_char(c, NULL);
-		return (1);
-	}
-	else if (*format == 's')
-	{
-		const char *s = va_arg(args, const char *);
-
-		if (s != NULL)
-		{
-			int len = 0;
-
-			while (s[len] != '\0')
-			{
-				++len;
-			}
-			handle_string(s, len, NULL);
-			return (len);
-		}
-		else
-		{
-			handle_string("(null)", 6, NULL);
-			return (6);
-		}
-	}
-	else if (*format == '%')
-	{
-		handle_char('%', NULL);
-		return (1);
-	}
-	else
-	{
-		return (-1);
-	}
+	_putchar('%');
+	return (1);
 }
 

@@ -1,12 +1,17 @@
 #ifndef _PRINTF_FUNCTION_
 #define _PRINTF_FUNCTION_
 
+typedef struct specifier
+{
+    char spec;
+    int (*f)(va_list);
+} specifier_t;
+
 int _putchar(char c);
 int _printf(const char *format, ...);
-int handle_format_specifier(const char **format_ptr, va_list args);
-void handle_string(const char *s, int len, int *count);
-void handle_string(const char *s, int len, int *count);
-
+int handle_c(va_list args);
+int handle_s(va_list args);
+int handle_percent(va_list args);
 
 
 #endif
