@@ -18,6 +18,7 @@ int _printf(const char *format, ...)
 		{'%', handle_percent},
 		{'d', handle_d},
 		{'i', handle_i},
+		{'b', handle_b},
 		{0, NULL}
 	};
 

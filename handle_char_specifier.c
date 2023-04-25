@@ -26,7 +26,7 @@ int handle_s(va_list args)
 	int i;
 	const char *str;
 
-	str = va_arg(args, char *);
+	str = va_arg(args, const char *);
 
 	if (str == NULL)
 	{

@@ -20,5 +20,7 @@ int handle_percent(va_list args);
 int handle_number(va_list);
 int handle_d(va_list args);
 int handle_i(va_list args);
+int handle_binary(va_list args);
+int handle_b(va_list args);
 
 #endif
