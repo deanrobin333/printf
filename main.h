@@ -1,6 +1,11 @@
 #ifndef _PRINTF_FUNCTION_
 #define _PRINTF_FUNCTION_
 
+/**
+ * struct specifier - struct containing a specifier
+ * @spec: the specifier
+ * @f: the function
+ */
 typedef struct specifier
 {
 	char spec;
@@ -9,7 +14,6 @@ typedef struct specifier
 
 int _putchar(char c);
 int _printf(const char *format, ...);
-void _vprintf(char *format, va_list args);
 int handle_c(va_list);
 int handle_s(va_list args);
 int handle_percent(va_list);
