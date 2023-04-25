@@ -9,9 +9,9 @@ typedef struct specifier
 
 int _putchar(char c);
 int _printf(const char *format, ...);
-int handle_c(va_list args);
+int handle_c(va_list);
 int handle_s(va_list args);
-int handle_percent(va_list args);
+int handle_percent(va_list);
 int handle_number(va_list);
 int handle_d(va_list args);
 int handle_i(va_list args);
