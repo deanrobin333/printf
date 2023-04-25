@@ -9,7 +9,7 @@
  */
 int handle_c(va_list args)
 {
-	const char c;
+	char c;
 
 	c = va_arg(args, int);
 	_putchar(c);
