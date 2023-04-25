@@ -1,52 +1,46 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "main.h"
+
 /**
- * handle_format_specifier - handles format specifier for _printf function
- * @format_ptr: pointer to format in printf function
- * @args: number of arguments
- * Return: value
+ * handle_c - prints a single character
+ * @args: the list of arguments
+ * Return: the number of characters printed
  */
-
-int handle_format_specifier(const char **format_ptr, va_list args)
+int handle_c(va_list args)
 {
-	const char *format = *format_ptr;
+	char c = va_arg(args, int);
 
-	if (*format == 'c')
-	{
-		char c = va_arg(args, int);
-
-		putchar(c);
-		return (1);
-	}
-	else if (*format == 's')
-	{
-		const char *s = va_arg(args, const char *);
-
-		if (s != NULL)
-		{
-			int len = 0;
-
-			while (s[len] != '\0')
-			{
-				++len;
-			}
-			fwrite(s, sizeof(char), len, stdout);
-			return (len);
-		}
-		else
-		{
-			fwrite("(null)", sizeof(char), 6, stdout);
-			return (6);
-		}
-	}
-	else if (*format == '%')
-	{
-		_putchar('%');
-		return (1);
-	}
-	else
-	{
-		return (-1);
-	}
+	_putchar(c);
+	return (1);
 }
+
+/**
+ * handle_s - prints a string
+ * @args: the list of arguments
+ * Return: the number of characters printed
+ */
+int handle_s(va_list args)
+{
+	char *str = va_arg(args, char *);
+	int i;
+
+	if (str == NULL)
+		str = "(null)";
+	for (i = 0; str[i] != '\0'; i++)
+		_putchar(str[i]);
+	return (i);
+}
+
+/**
+ * handle_percent - prints a percent symbol
+ * @args: the list of arguments (unused)
+ *
+ * Return: the number of characters printed (always 1)
+ */
+int handle_percent(__attribute__((unused))va_list args)
+{
+	_putchar('%');
+	return (1);
+}
+

@@ -1,43 +1,47 @@
-#include <stdarg.h>
 #include <stdio.h>
-#include <unistd.h>
+#include <stdarg.h>
 #include "main.h"
 
 /**
- * _printf - function that produces output according to a format
- * @format: format
- * @...: variable functions
- * Return: count
+ * _printf - produces output according to a format
+ * @format: format string
+ *
+ * Return: number of characters printed (excluding null byte)
  */
 int _printf(const char *format, ...)
 {
-	int count = 0;
 	va_list args;
-	int res = handle_format_specifier(&format, args);
+	int i, j, len = 0;
+	specifier_t specifiers[] = {
+		{'c', handle_c},
+		{'s', handle_s},
+		{'%', handle_percent},
+		{0, NULL}
+	};
 
 	va_start(args, format);
-	while (*format != '\0')
+
+	for (i = 0; format && format[i]; i++)
 	{
-		if (*format == '%')
+		if (format[i] == '%')
 		{
-			++format;
-			if (res < 0)
+			for (j = 0; specifiers[j].spec; j++)
 			{
-				va_end(args);
-				return (-1);
+				if (format[i + 1] == specifiers[j].spec)
+				{
+					len += specifiers[j].f(args);
+					i++;
+					break;
+				}
 			}
-			else
-			{
-				count += res;
-			}
+			if (!specifiers[j].spec)
+				len += _putchar(format[i]);
 		}
 		else
-		{
-			_putchar(*format);
-			++count;
-		}
-		++format;
+			len += _putchar(format[i]);
 	}
+
 	va_end(args);
-	return (count);
+	return (len);
 }
+
