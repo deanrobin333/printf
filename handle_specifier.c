@@ -1,6 +1,44 @@
 #include <stdio.h>
 #include <stdarg.h>
+#include <unistd.h>
 #include "main.h"
+/**
+ * handle_char - function that handles characters
+ * @c: character
+ * @count: iterate
+ * Return: void
+ */
+void handle_char(char c, int *count)
+{
+	_putchar(c);
+	if (count != NULL)
+	{
+		++(*count);
+	}
+}
+
+/**
+ * handle_string - function that deals with strings.
+ * @s: string being handled
+ * @len: length of string
+ * @count: iterate
+ * Return: void
+ */
+
+void handle_string(const char *s, int len, int *count)
+{
+	int i;
+
+	for (i = 0; i < len; ++i)
+	{
+		_putchar(s[i]);
+		if (count != NULL)
+		{
+			++(*count);
+		}
+	}
+}
+
 /**
  * handle_format_specifier - handles format specifier for _printf function
  * @format_ptr: pointer to format in printf function
@@ -16,7 +54,7 @@ int handle_format_specifier(const char **format_ptr, va_list args)
 	{
 		char c = va_arg(args, int);
 
-		putchar(c);
+		handle_char(c, NULL);
 		return (1);
 	}
 	else if (*format == 's')
@@ -31,18 +69,18 @@ int handle_format_specifier(const char **format_ptr, va_list args)
 			{
 				++len;
 			}
-			fwrite(s, sizeof(char), len, stdout);
+			handle_string(s, len, NULL);
 			return (len);
 		}
 		else
 		{
-			fwrite("(null)", sizeof(char), 6, stdout);
+			handle_string("(null)", 6, NULL);
 			return (6);
 		}
 	}
 	else if (*format == '%')
 	{
-		_putchar('%');
+		handle_char('%', NULL);
 		return (1);
 	}
 	else
@@ -50,3 +88,4 @@ int handle_format_specifier(const char **format_ptr, va_list args)
 		return (-1);
 	}
 }
+
