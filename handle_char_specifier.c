@@ -9,8 +9,9 @@
  */
 int handle_c(va_list args)
 {
-	char c = va_arg(args, int);
+	char c;
 
+	c = va_arg(args, int);
 	_putchar(c);
 	return (1);
 }
@@ -23,7 +24,9 @@ int handle_c(va_list args)
 int handle_s(va_list args)
 {
 	int i;
-	const char *str = va_arg(args, const char *);
+	char *str;
+
+	str = va_arg(args, char *);
 
 	if (str == NULL)
 	{
