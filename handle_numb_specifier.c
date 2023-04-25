@@ -54,7 +54,7 @@ int handle_d(va_list args)
 
 }
 /**
- * handle_i - handle format specifier "d"
+ * handle_i - handle format specifier "i"
  * @args: va_list containing the integer to print
  * Return: number of characters printed
  */
