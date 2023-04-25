@@ -10,18 +10,22 @@
  */
 int _printf(const char *format, ...)
 {
-	va_list args;
 	int i, j, len = 0;
+
 	specifier_t specifiers[] = {
-		{'c', handle_c},
-		{'s', handle_s},
-		{'%', handle_percent},
+		{'c', handle_c}, {'s', handle_s}, {'%', handle_percent},
+		{'d', handle_d}, {'i', handle_i},
+		{'b', handle_b},
+		{'u', handle_u}, {'o', handle_o}, {'x', handle_x}, {'X', handle_X},
 		{0, NULL}
 	};
 
-	va_start(args, format);
+	va_list args;
 
-	for (i = 0; format && format[i] !='\0'; i++)
+	if (format == NULL)
+		return (-1);
+	va_start(args, format);
+	for (i = 0; format && format[i]; i++)
 	{
 		if (format[i] == '%')
 		{
