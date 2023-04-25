@@ -10,7 +10,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int i, j, len = 0;
+	int printed_characters;
 
 	specifier_t specifiers[] = {
 		{'c', handle_c}, {'s', handle_s}, {'%', handle_percent},
@@ -25,27 +25,8 @@ int _printf(const char *format, ...)
 	if (format == NULL)
 		return (-1);
 	va_start(args, format);
-	for (i = 0; format && format[i]; i++)
-	{
-		if (format[i] == '%')
-		{
-			for (j = 0; specifiers[j].spec; j++)
-			{
-				if (format[i + 1] == specifiers[j].spec)
-				{
-					len += specifiers[j].f(args);
-					i++;
-					break;
-				}
-			}
-			if (!specifiers[j].spec)
-				len += _putchar(format[i]);
-		}
-		else
-			len += _putchar(format[i]);
-	}
-
+	printed_characters = code_analyzer(format, specifiers, args);
 	va_end(args);
-	return (len);
+	return (printed_characters);
 }
 
