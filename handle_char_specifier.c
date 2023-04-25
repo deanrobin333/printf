@@ -24,9 +24,9 @@ int handle_c(va_list args)
 int handle_s(va_list args)
 {
 	int i;
-	const char *str;
+	char *str;
 
-	str = va_arg(args, const char *);
+	str = va_arg(args, char *);
 
 	if (str == NULL)
 	{
@@ -42,7 +42,6 @@ int handle_s(va_list args)
 /**
  * handle_percent - prints a percent symbol
  * @args: the list of arguments (unused)
- *
  * Return: the number of characters printed (always 1)
  */
 
