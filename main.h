@@ -16,6 +16,7 @@ typedef struct specifier
 
 int _putchar(char c);
 int _printf(const char *format, ...);
+int code_analyzer(const char *format, specifier_t specifiers[], va_list args);
 int handle_c(va_list args);
 int handle_s(va_list args);
 int handle_percent(va_list args);
