@@ -56,16 +56,16 @@ int handle_o(va_list args)
  */
 int handle_x(va_list args)
 {
-	unsigned int num = va_arg(args, unsigned int);
-	int length = 0;
-	char hex[16] = "0123456789abcdef";
+    unsigned int num = va_arg(args, unsigned int);
+    int length = 0;
+    char hex[16] = "0123456789abcdef";
 
-	if (num / 16)
-		length += handle_x(args);
+    if (num / 16)
+        length += handle_x(args);
 
-	length += _putchar(hex[num % 16]);
+    length += _putchar(hex[num % 16]);
 
-	return (length);
+    return (length);
 }
 
 /**
@@ -75,15 +75,15 @@ int handle_x(va_list args)
  */
 int handle_X(va_list args)
 {
-	unsigned int num = va_arg(args, unsigned int);
-	int length = 0;
-	char hex[16] = "0123456789ABCDEF";
+    unsigned int num = va_arg(args, unsigned int);
+    int length = 0;
+    char hex[16] = "0123456789ABCDEF";
 
-	if (num / 16)
-		length += handle_X(args);
+    if (num / 16)
+        length += handle_X(args);
 
-	length += _putchar(hex[num % 16]);
+    length += _putchar(hex[num % 16]);
 
-	return (length);
+    return (length);
 }
 
