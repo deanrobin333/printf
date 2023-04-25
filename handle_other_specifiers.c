@@ -8,8 +8,8 @@
  */
 int handle_u(va_list args)
 {
-	unsigned int num = va_arg(args, unsigned int);
-	unsigned int check = 1;
+	unsigned long int num = va_arg(args, unsigned long int);
+	unsigned long int check = 1;
 	int length = 0;
 
 	for (; num / check > 9; )
@@ -32,8 +32,8 @@ int handle_u(va_list args)
  */
 int handle_o(va_list args)
 {
-	unsigned int num = va_arg(args, unsigned int);
-	unsigned int check = 1;
+	unsigned long int num = va_arg(args, unsigned long int);
+	unsigned long int check = 1;
 	int length = 0;
 
 	for (; num / check > 7; )
