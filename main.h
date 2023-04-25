@@ -1,5 +1,7 @@
 #ifndef _PRINTF_FUNCTION_
 #define _PRINTF_FUNCTION_
+#define HEX_LOWER "0123456789abcdef"
+#define HEX_UPPER "0123456789ABCDEF"
 
 /**
  * struct specifier - struct containing a specifier
