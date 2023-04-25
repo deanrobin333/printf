@@ -23,12 +23,15 @@ int _printf(const char *format, ...)
 		{'o', handle_o},
 		{'x', handle_x},
 		{'X', handle_X},
-		{'p', handle_p},
 		{0, NULL}
 	};
 
 	va_start(args, format);
 
+	if (format == NULL)
+	{
+		return (-1);
+	}
 	for (i = 0; format && format[i]; i++)
 	{
 		if (format[i] == '%')
