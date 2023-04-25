@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "main.h"
+#include <stdlib.h>
+#include <unistd.h>
+
 /**
  * handle_u - handle format specifier "u"
  * @args: va_list containing the unsigned integer to print
@@ -54,36 +57,39 @@ int handle_o(va_list args)
  * @args: va_list containing the unsigned integer to print
  * Return: number of characters printed
  */
+int write_hex(unsigned long int num, const char *map_to, char flag_ch);
+
 int handle_x(va_list args)
 {
-    unsigned int num = va_arg(args, unsigned int);
-    int length = 0;
-    char hex[16] = "0123456789abcdef";
-
-    if (num / 16)
-        length += handle_x(args);
-
-    length += _putchar(hex[num % 16]);
-
-    return (length);
+    unsigned long int num = va_arg(args, unsigned long int);
+    return write_hex(num, HEX_LOWER, 'x');
 }
 
-/**
- * handle_X - handle format specifier "X"
- * @args: va_list containing the unsigned integer to print
- * Return: number of characters printed
- */
 int handle_X(va_list args)
 {
-    unsigned int num = va_arg(args, unsigned int);
-    int length = 0;
-    char hex[16] = "0123456789ABCDEF";
-
-    if (num / 16)
-        length += handle_X(args);
-
-    length += _putchar(hex[num % 16]);
-
-    return (length);
+    unsigned long int num = va_arg(args, unsigned long int);
+    return write_hex(num, HEX_UPPER, 'X');
 }
 
+int write_hex(unsigned long int num, const char *map_to, char flag_ch)
+{
+    int count = 0;
+
+    char buffer[sizeof(unsigned long int) * 2 + 1];
+    char *ptr = buffer + sizeof(buffer) - 1;
+    *ptr = '\0';
+
+    do {
+        *--ptr = map_to[num % 16];
+        num /= 16;
+        count++;
+    } while (num != 0);
+
+    if (flag_ch != '\0') {
+        *--ptr = flag_ch;
+        *--ptr = '0';
+        count += 2;
+    }
+
+    return write(STDOUT_FILENO, ptr, sizeof(buffer) - (ptr - buffer)) == -1 ? -1 : count;
+}
