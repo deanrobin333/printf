@@ -3,8 +3,8 @@
 
 typedef struct specifier
 {
-    char spec;
-    int (*f)(va_list);
+	char spec;
+	int (*f)(va_list);
 } specifier_t;
 
 int _putchar(char c);
