@@ -12,13 +12,17 @@
 int code_analyzer(const char *format, specifier_t specifiers[], va_list args)
 {
 	int i, j, len = 0;
+
 	if (format == NULL)
 		return (-1);
 
-	for (i = 0; format && format[i]; i++)
+	for (i = 0; format[i]; i++)
 	{
 		if (format[i] == '%')
 		{
+			if (!format[i + 1])
+				return (-1);
+
 			for (j = 0; specifiers[j].spec; j++)
 			{
 				if (format[i + 1] == specifiers[j].spec)
