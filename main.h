@@ -31,4 +31,5 @@ int handle_X(va_list args);
 int handle_S(va_list args);
 int handle_p(va_list args);
 int print_hex(unsigned long int num, char *charset);
+char *handle_plus_space_hash(const char *format, char specifier);
 #endif
