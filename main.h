@@ -29,4 +29,6 @@ int handle_o(va_list args);
 int handle_x(va_list args);
 int handle_X(va_list args);
 int handle_S(va_list args);
+int handle_p(va_list args);
+int print_hex(unsigned long int num, char *charset);
 #endif

@@ -18,6 +18,7 @@ int _printf(const char *format, ...)
 		{'b', handle_b},
 		{'u', handle_u}, {'o', handle_o}, {'x', handle_x}, {'X', handle_X},
 		{'S', handle_S},
+		{'p', handle_p},
 		{0, NULL}
 	};
 

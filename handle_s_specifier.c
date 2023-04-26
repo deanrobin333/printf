@@ -21,24 +21,13 @@ int handle_S(va_list args)
 	{
 		if (str[i] < 32 || str[i] >= 127)
 		{
-			char hex_digits[3];
-			sprintf(hex_digits, "%02X", (unsigned char)str[i]);
-			putchar('\\');
-			putchar('x');
-			putchar(hex_digits[0]);
-			putchar(hex_digits[1]);
-			count += 4;
+			count += printf("\\x%02X", (unsigned char)str[i]);
 		}
 		else
 		{
-			putchar(str[i]);
-			count++;
+			count += putchar(str[i]);
 		}
 	}
-
-	putchar('\n');
-	count++;
-
-	return count;
+	return (count);
 }
 
