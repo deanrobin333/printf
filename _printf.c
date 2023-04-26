@@ -23,6 +23,7 @@ int _printf(const char *format, ...)
 		{'o', handle_o},
 		{'x', handle_x},
 		{'X', handle_X},
+		{'p', handle_p},
 		{0, NULL}
 	};
 
