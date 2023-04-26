@@ -22,6 +22,7 @@ int handle_number(va_list);
 int handle_d(va_list args);
 int handle_i(va_list args);
 int handle_binary(va_list args);
+int handle_number_helper(va_list args, int base, int is_signed, int uppercase);
 int handle_b(va_list args);
 int handle_u(va_list args);
 int handle_o(va_list args);
